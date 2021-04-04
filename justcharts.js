@@ -1,5 +1,3 @@
-let viewDivs = document.getElementsByClassName('vega-chart');
-
 async function parseSchema(viewdiv){
     let url = viewdiv.attributes['schema-url'].textContent;
     var resp = await fetch(url);
@@ -20,6 +18,9 @@ function parseInlineSchema(viewdiv){
 }
 
 window.onload = function(){
+    let viewDivs = document.querySelectorAll('vegachart');
+    console.log(viewDivs)
+
     for (let index = 0; index < viewDivs.length; index++) {
         if ('schema-url' in viewDivs[index].attributes) {
             parseSchema(viewDivs[index]).then(schema => vegaEmbed(viewDivs[index], schema, {"actions": false}));
