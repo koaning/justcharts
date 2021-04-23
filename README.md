@@ -29,3 +29,26 @@ You can create a vega based chart directly in html.
 ```
 
 ### inline 
+
+Alternatively, you can also declare the vegalite-json definition inline in the `vegachart` component. 
+
+```html
+<vegachart style="width: 100%">
+    {
+        "data":{
+            "url": "https://localhost:8080/dataset.csv",
+            "format": {
+                "type": "csv"
+            }
+        },
+        "mark": "line",
+        "encoding": {
+            "x": {"field": "date", "type": "temporal"},
+            "y": {"field": "local_price", "type": "quantitative"},
+            "color": {"field": "currency_code", "type": "nominal"}
+        },
+        "width": "container",
+        "title": "hello there"
+    }
+</vegachart>
+```
