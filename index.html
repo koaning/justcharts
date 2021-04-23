@@ -21,25 +21,7 @@
                 "mark": "line",
                 "encoding": {
                     "x": {"field": "date", "type": "temporal"},
-                    "y": {"field": "local_price", "type": "quantitative"},
-                    "color": {"field": "currency_code", "type": "nominal"}
-                },
-                "width": "container",
-                "title": "hello there"
-            }
-        </vegachart>
-        <vegachart style="width: 100%">
-            {
-                "data":{
-                    "url": "https://my-data-app.fly.dev/bigmac.csv?sql=select+rowid%2C+date%2C+currency_code%2C+name%2C+local_price%2C+dollar_ex%2C+dollar_price+from+bigmac+where+currency_code+in+%28%22GBP%22%2C+%22EUR%22%2C+%22CAD%22%29+order+by+rowid+limit+101&_size=max",
-                    "format": {
-                        "type": "csv"
-                    }
-                },
-                "mark": "line",
-                "encoding": {
-                    "x": {"field": "date", "type": "temporal"},
-                    "y": {"field": "local_price", "type": "quantitative"},
+                    "y": {"field": "dollar_ex", "type": "quantitative"},
                     "color": {"field": "currency_code", "type": "nominal"}
                 },
                 "width": "container",
