@@ -1,3 +1,5 @@
+<img src="icon.png" width=125 height=125 align="right">
+
 # justcharts
 
 > Just charts. Really.
