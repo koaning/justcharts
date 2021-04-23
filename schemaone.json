@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Google's stock price over time.",
+    "description": "Inflation Price Data.",
     "data": {
-      "url": "https://my-data-app.fly.dev/bigmac.csv?sql=select+rowid%2C+date%2C+currency_code%2C+name%2C+local_price%2C+dollar_ex%2C+dollar_price+from+bigmac+where+currency_code+in+%28%22GBP%22%2C+%22EUR%22%2C+%22CAD%22%29+order+by+rowid+limit+101&_size=max", 
+      "url": "https://cdn.jsdelivr.net/gh/koaning/justcharts/bigmac.csv", 
       "format": {
         "type": "csv"
       }
