@@ -2,7 +2,7 @@
 
 > Just charts. Really.
 
-The goal of this project is to make it incredibly easy to hack together a [vegalite](https://vega.github.io/vega-lite/) dashboard declaratively.
+The goal of this project is to make it incredibly easy to hack together a [vegalite](https://vega.github.io/vega-lite/) dashboard declaratively. The goal is that anything made in the [vegalite editor](https://vega.github.io/editor/#/) can be copied into a static file with ease.
 
 ## include 
 
@@ -52,3 +52,9 @@ Alternatively, you can also declare the vegalite-json definition inline in the `
     }
 </vegachart>
 ```
+
+Note the `"widget":"container"` setting. By specifying the container size you're able to set the width/height of the chart directly from the `<vegachart>` html-style property.
+
+## demo 
+
+You can find a demo [here]().
