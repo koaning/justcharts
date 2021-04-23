@@ -36,7 +36,7 @@ Alternatively, you can also declare the vegalite-json definition inline in the `
 <vegachart style="width: 100%">
     {
         "data":{
-            "url": "https://localhost:8080/dataset.csv",
+            "url": "https://cdn.jsdelivr.net/gh/koaning/justcharts/bigmac.csv",
             "format": {
                 "type": "csv"
             }
