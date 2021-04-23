@@ -57,4 +57,4 @@ Note the `"widget":"container"` setting. By specifying the container size you're
 
 ## demo 
 
-You can find a demo [here]().
+You can find a demo [here](https://koaning.github.io/justcharts/).
