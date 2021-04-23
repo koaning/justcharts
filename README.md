@@ -55,7 +55,7 @@ Alternatively, you can also declare the vegalite-json definition inline in the `
 </vegachart>
 ```
 
-Note the `"widget":"container"` setting. By doing this you're able to set the width/height of the chart directly from the `<vegachart>` html-style property. This is great for relatively widths.
+Note the `"widget":"container"` setting. By doing this you're able to set the width/height of the chart directly from the `<vegachart>` html-style property. This is great for containers with relative widths.
 
 ## demo 
 
