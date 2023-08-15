@@ -1,33 +1,58 @@
-async function parseSchema(viewdiv){
-    let url = viewdiv.attributes['schema-url'].textContent;
-    var resp = await fetch(url);
-    var schema = await resp.json();
-    return schema
-}
+customElements.define(
+    "vega-chart",
+    class extends HTMLElement {
+        connectedCallback() {
+            if(!this.isConnected) return;
 
-function parseInlineSchema(viewdiv){
-    let inline = JSON.parse(viewdiv.textContent);
-    
-    let baseSchema = {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    }
+            this.shadow = this.attachShadow({mode: 'open'});
+            this.el = this.shadow.appendChild(document.createElement("div"));
 
-    let schema = Object.assign({}, baseSchema, inline)
-    return schema
-}
+            // NOTE: required for width: container to work
+            this.el.style = "display: block;"
 
-window.onload = function(){
-    // Find all the <vegachart> elements.
-    let viewDivs = document.querySelectorAll('vegachart');
+            this.nextEpoch = 0;
+            this.epoch = null;
 
-    // Replace all <vegachart> html contents with proper vegalite charts.
-    for (let index = 0; index < viewDivs.length; index++) {
-        if ('schema-url' in viewDivs[index].attributes) {
-            parseSchema(viewDivs[index]).then(schema => vegaEmbed(viewDivs[index], schema, {"actions": false}));
-        }else{
-            console.log(viewDivs[index].textContent)
-            var schema = parseInlineSchema(viewDivs[index]);
-            vegaEmbed(viewDivs[index], schema, {"actions": false});
+            this.update();
+
+            new MutationObserver(() => this.update()).observe(this, {
+                attributeFilter: ["schema-url"],
+                attributes: true,
+                childList: true,
+                subtree: true,
+            });
+        }
+
+        update() {
+            const epoch = this.epoch = this.nextEpoch++;
+            this.loadSpec()
+                .then(spec => {
+                    if(this.epoch != epoch) {
+                        return;
+                    }
+
+                    if(spec != null) {
+                        vegaEmbed(this.el, spec, {actions: false});
+                    } else {
+                        Array.from(this.el.children).forEach(el => el.remove());
+                    }
+                })
+                .catch(err => console.error(err));
+        }
+
+        async loadSpec() {
+            const schemaUrl = this.getAttribute("schema-url");
+            if(schemaUrl != null) {
+                const r = await fetch(schemaUrl);
+                return await r.json();
+            }
+
+            const inlineSchema = this.textContent.trim();
+            if(inlineSchema != "") {
+                return JSON.parse(inlineSchema);
+            }
+
+            return null;
         }
     }
-}
+);
