@@ -19,25 +19,30 @@ customElements.define(
                 attributeFilter: ["schema-url"],
                 attributes: true,
                 childList: true,
-                subtree: true,
             });
         }
 
         update() {
             const epoch = this.epoch = this.nextEpoch++;
-            this.loadSpec()
-                .then(spec => {
+
+            (async () => {
+                try {
+                    const spec = await this.loadSpec();
                     if(this.epoch != epoch) {
                         return;
                     }
 
                     if(spec != null) {
-                        vegaEmbed(this.el, spec, {actions: false});
+                        await vegaEmbed(this.el, spec, {actions: false});
                     } else {
-                        Array.from(this.el.children).forEach(el => el.remove());
+                        while(this.el.firstChild) {
+                            this.el.firstChild.remove();
+                        }
                     }
-                })
-                .catch(err => console.error(err));
+                } catch(err) {
+                    console.error(err);
+                }
+            })();
         }
 
         async loadSpec() {
